@@ -61,7 +61,8 @@ body {
 #video-camera-view,
 #canvas-camera-sensor,
 #img-camera-output {
-  transform: scaleX(-1);
+  /* Realiza o espelhamento para camera frontal */
+  /* transform: scaleX(-1); */
   filter: FlipH;
 }
 

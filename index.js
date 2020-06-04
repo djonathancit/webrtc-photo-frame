@@ -1,4 +1,5 @@
 // Setando constraints para o video
+//alterado o facingMode para user muda para a camera frontal do celular
 var constraints = { video: { facingMode: "environment" }, audio: false };
 // Definindo Constants
 const cameraView = document.querySelector("#video-camera-view");

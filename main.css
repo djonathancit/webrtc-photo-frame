@@ -6,6 +6,27 @@ body {
   width: 100%;
 }
 
+#device-detected {
+  margin-top: 45px;
+  margin-left: 150px;
+  z-index: 2;
+  position: fixed;
+}
+
+#browser-detected {
+  margin-top: 30px;
+  margin-left: 150px;
+  z-index: 2;
+  position: fixed;
+}
+
+#browser-detected2 {
+  margin-top: 60px;
+  margin-left: 150px;
+  z-index: 2;
+  position: fixed;
+}
+
 .photo-view {
   height: 100px !important;
   width: 100px !important;

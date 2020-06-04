@@ -1,0 +1,70 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.photo-view {
+  height: 100px !important;
+  width: 100px !important;
+  transition: all 0.5s ease-in;
+  border: solid 3px white;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+#frame-border {
+  margin-top: 20px;
+  margin-left: 20px;
+  z-index: 2;
+  border: 5px solid blue;
+  min-height: calc(100% - 120px);
+  min-width: calc(100% - 50px);
+  position: fixed;
+}
+
+#rectangle {
+  margin-top: 20px;
+  margin-left: 20px;
+  z-index: 2;
+  border: 5px solid purple;
+  min-height: 100px;
+  min-width: 80px;
+  position: fixed;
+}
+
+#video-camera-view,
+#canvas-camera-sensor,
+#img-camera-output {
+  transform: scaleX(-1);
+  filter: FlipH;
+}
+
+#button-capture {
+  width: 200px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 30px;
+  left: calc(50% - 100px);
+}
+
+#main-camera,
+#video-camera-view,
+#canvas-camera-sensor,
+#img-camera-output {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

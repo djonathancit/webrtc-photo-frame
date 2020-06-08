@@ -38,6 +38,7 @@ function capturePhoto() {
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
   cameraOutput.src = cameraSensor.toDataURL("image/webp");
   cameraOutput.classList.add("photo-view");
+  uploadFile();
 }
 
 function mobileAndTabletCheck() {
@@ -266,6 +267,30 @@ let OS = searchString(dataOS) || "an unknown OS";
 
   browserDetected2.textContent = `Browser: ${browser} version: ${version} OS:${OS}`;
 
+}
+
+
+function uploadFile(){
+  dataUrl=cameraSensor.toDataURL("image/webp");
+  var blobBin = atob(dataURL.split(',')[1]);
+var array = [];
+for(var i = 0; i < blobBin.length; i++) {
+    array.push(blobBin.charCodeAt(i));
+}
+var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+
+
+var formdata = new FormData();
+formdata.append("data", file);
+$.ajax({
+   url: "https://uploads-fileserver.herokuapp.com/upload",
+   type: "POST",
+   data: formdata,
+   processData: false,
+   contentType: false,
+}).done(function(respond){
+  alert(respond);
+});
 }
 
 // Add metodo para tirar foto no botão

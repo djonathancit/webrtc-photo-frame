@@ -314,6 +314,8 @@ function uploadFile() {
     }
   };
   xhr.open("post", url, true);
+  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+  xhr.setRequestHeader("Access-Control-Allow-Methods","*");
   xhr.setRequestHeader("Content-Type", "multipart/form-data");
   xhr.send(formdata);
 

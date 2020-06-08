@@ -283,7 +283,7 @@ function uploadFile() {
   
   //var url = "https://192.168.0.107:3000";
   //var url = "https://uploads-fileserver.herokuapp.com";
-  var url = "https://d9b4f44fed6b.ngrok.io";
+  var url = "https://djonathancit-upload-file-node.glitch.me";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this
   xhr.addEventListener(

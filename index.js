@@ -280,8 +280,8 @@ function uploadFile() {
 
   var formdata = new FormData();
   formdata.append("data", file);
-
-  //var url = "http://localhost:3000";
+  
+  //var url = "https://192.168.0.107:3000";
   var url = "https://uploads-fileserver.herokuapp.com";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this

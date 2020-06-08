@@ -27,6 +27,14 @@ body {
   position: fixed;
 }
 
+#image-name {
+  margin-top: 180px;
+  margin-left: 150px;
+  z-index: 2;
+  position: fixed;
+  font-size: 30px;
+}
+
 .photo-view {
   height: 100px !important;
   width: 100px !important;

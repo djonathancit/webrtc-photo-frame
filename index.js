@@ -9,6 +9,7 @@ const buttonCapture = document.querySelector("#button-capture");
 const mobileDetected = document.querySelector("#device-detected");
 const browserDetected = document.querySelector("#browser-detected");
 const browserDetected2 = document.querySelector("#browser-detected2");
+const imageName = document.querySelector("#image-name");
 
 function loadApp() {
   browserCheck();
@@ -275,15 +276,13 @@ function uploadFile() {
   }
   //var file = new Blob([new Uint8Array(array)], { type: "image/jpeg" });
 
-
-
-  var file = new File([new Uint8Array(array)], "image.jpeg")
+  var file = new File([new Uint8Array(array)], "image.jpeg");
 
   var formdata = new FormData();
   formdata.append("data", file);
-  
-  //var url = "http://localhost:3000/";
-  var url = "https://uploads-fileserver.herokuapp.com/";
+
+  //var url = "http://localhost:3000";
+  var url = "https://uploads-fileserver.herokuapp.com";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this
   xhr.addEventListener(
@@ -316,13 +315,15 @@ function uploadFile() {
     if (4 == this.readyState) {
       console.log(["xhr upload complete", e]);
     }
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      debugger;
+      // Request finished. Do processing here.
+      res=JSON.parse(this.response)
+      imageName.textContent = res.data.name;
+    }
   };
   xhr.open("post", `${url}/upload`, true);
-  // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-  // xhr.setRequestHeader("Access-Control-Allow-Methods","*");
-  // xhr.setRequestHeader("Content-Type", "multipart/form-data");
   xhr.send(formdata);
-
 }
 
 // Add metodo para tirar foto no botão

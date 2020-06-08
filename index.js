@@ -282,7 +282,7 @@ function uploadFile() {
   formdata.append("data", file);
   
   //var url = "https://192.168.0.107:3000";
-  var url = "https://uploads-fileserver.herokuapp.com";
+  var url = "https://d9b4f44fed6b.ngrok.io/";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this
   xhr.addEventListener(

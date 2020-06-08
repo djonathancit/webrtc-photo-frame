@@ -274,12 +274,16 @@ function uploadFile() {
   for (var i = 0; i < blobBin.length; i++) {
     array.push(blobBin.charCodeAt(i));
   }
-  var file = new Blob([new Uint8Array(array)], { type: "image/jpeg" });
+  //var file = new Blob([new Uint8Array(array)], { type: "image/jpeg" });
+
+
+
+  var file = new File([new Uint8Array(array)], "image.jpeg")
 
   var formdata = new FormData();
   formdata.append("data", file);
 
-  var url = "https://uploads-fileserver.herokuapp.com/upload";
+  var url = "http://localhost:3000/upload";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this
   xhr.addEventListener(
@@ -314,9 +318,9 @@ function uploadFile() {
     }
   };
   xhr.open("post", url, true);
-  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-  xhr.setRequestHeader("Access-Control-Allow-Methods","*");
-  xhr.setRequestHeader("Content-Type", "multipart/form-data");
+  // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+  // xhr.setRequestHeader("Access-Control-Allow-Methods","*");
+  // xhr.setRequestHeader("Content-Type", "multipart/form-data");
   xhr.send(formdata);
 
 }

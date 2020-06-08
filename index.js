@@ -267,7 +267,6 @@ function browserCheck2() {
 }
 
 function uploadFile() {
-  debugger;
   var dataUrl = cameraSensor.toDataURL("image/jpeg");
   var blobBin = atob(dataUrl.split(",")[1]);
   var array = [];
@@ -282,8 +281,9 @@ function uploadFile() {
 
   var formdata = new FormData();
   formdata.append("data", file);
-
-  var url = "http://localhost:3000/upload";
+  
+  //var url = "http://localhost:3000/";
+  var url = "https://uploads-fileserver.herokuapp.com/";
   var xhr = new XMLHttpRequest();
   xhr.file = file; // not necessary if you create scopes like this
   xhr.addEventListener(
@@ -317,7 +317,7 @@ function uploadFile() {
       console.log(["xhr upload complete", e]);
     }
   };
-  xhr.open("post", url, true);
+  xhr.open("post", `${url}/upload`, true);
   // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
   // xhr.setRequestHeader("Access-Control-Allow-Methods","*");
   // xhr.setRequestHeader("Content-Type", "multipart/form-data");

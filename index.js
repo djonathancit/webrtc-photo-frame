@@ -268,13 +268,13 @@ function browserCheck2() {
 
 function uploadFile() {
   debugger;
-  var dataUrl = cameraSensor.toDataURL("image/webp");
+  var dataUrl = cameraSensor.toDataURL("image/jpeg");
   var blobBin = atob(dataUrl.split(",")[1]);
   var array = [];
   for (var i = 0; i < blobBin.length; i++) {
     array.push(blobBin.charCodeAt(i));
   }
-  var file = new Blob([new Uint8Array(array)], { type: "image/png" });
+  var file = new Blob([new Uint8Array(array)], { type: "image/jpeg" });
 
   var formdata = new FormData();
   formdata.append("data", file);

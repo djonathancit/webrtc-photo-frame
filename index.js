@@ -115,15 +115,13 @@ function browserCheck() {
   browserDetected.textContent = "Browser Not Detected";
 }
 
-
 function searchString(data) {
   for (var i = 0; i < data.length; i++) {
     var dataString = data[i].string;
     var dataProp = data[i].prop;
     this.versionSearchString = data[i].versionSearch || data[i].identity;
     if (dataString) {
-      if (dataString.indexOf(data[i].subString) != -1)
-        return data[i].identity;
+      if (dataString.indexOf(data[i].subString) != -1) return data[i].identity;
     } else if (dataProp) return data[i].identity;
   }
 }
@@ -137,7 +135,7 @@ function searchVersion(dataString) {
 }
 
 function browserCheck2() {
-  let dataBrowser= [
+  let dataBrowser = [
     {
       string: navigator.userAgent,
       subString: "Chrome",
@@ -230,11 +228,12 @@ function browserCheck2() {
     },
   ];
 
-
-let browser = searchString(dataBrowser) || "An unknown browser";
-let version = searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion) || "an unknown version";
-let OS = searchString(dataOS) || "an unknown OS";
-
+  let browser = searchString(dataBrowser) || "An unknown browser";
+  let version =
+    searchVersion(navigator.userAgent) ||
+    this.searchVersion(navigator.appVersion) ||
+    "an unknown version";
+  let OS = searchString(dataOS) || "an unknown OS";
 
   ///// mobile
   var isMobile = {
@@ -264,33 +263,60 @@ let OS = searchString(dataOS) || "an unknown OS";
     },
   };
 
-
   browserDetected2.textContent = `Browser: ${browser} version: ${version} OS:${OS}`;
-
 }
 
-
-function uploadFile(){
-  dataUrl=cameraSensor.toDataURL("image/webp");
-  var blobBin = atob(dataURL.split(',')[1]);
-var array = [];
-for(var i = 0; i < blobBin.length; i++) {
+function uploadFile() {
+  debugger;
+  var dataUrl = cameraSensor.toDataURL("image/webp");
+  var blobBin = atob(dataUrl.split(",")[1]);
+  var array = [];
+  for (var i = 0; i < blobBin.length; i++) {
     array.push(blobBin.charCodeAt(i));
-}
-var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+  }
+  var file = new Blob([new Uint8Array(array)], { type: "image/png" });
 
+  var formdata = new FormData();
+  formdata.append("data", file);
 
-var formdata = new FormData();
-formdata.append("data", file);
-$.ajax({
-   url: "https://uploads-fileserver.herokuapp.com/upload",
-   type: "POST",
-   data: formdata,
-   processData: false,
-   contentType: false,
-}).done(function(respond){
-  alert(respond);
-});
+  var url = "http://localhost:6000/upload";
+  var xhr = new XMLHttpRequest();
+  xhr.file = file; // not necessary if you create scopes like this
+  xhr.addEventListener(
+    "progress",
+    function (e) {
+      var done = e.position || e.loaded,
+        total = e.totalSize || e.total;
+      console.log(
+        "xhr progress: " + Math.floor((done / total) * 1000) / 10 + "%"
+      );
+    },
+    false
+  );
+  if (xhr.upload) {
+    xhr.upload.onprogress = function (e) {
+      var done = e.position || e.loaded,
+        total = e.totalSize || e.total;
+      console.log(
+        "xhr.upload progress: " +
+          done +
+          " / " +
+          total +
+          " = " +
+          Math.floor((done / total) * 1000) / 10 +
+          "%"
+      );
+    };
+  }
+  xhr.onreadystatechange = function (e) {
+    if (4 == this.readyState) {
+      console.log(["xhr upload complete", e]);
+    }
+  };
+  xhr.open("post", url, true);
+  xhr.setRequestHeader("Content-Type", "multipart/form-data");
+  xhr.send(formdata);
+
 }
 
 // Add metodo para tirar foto no botão
